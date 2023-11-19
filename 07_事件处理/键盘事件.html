@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>键盘事件</title>
+        <!-- 引入Vue -->
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 
+            1、Vue常见按键别名：
+                回车 enter
+                删除 delete
+                退出 esc
+                空格 space
+                换行 tab
+                上 up
+                下 down
+                左 left
+                右 right
+            2、Vue未提供别名的，可以用原始按键的key值，需要将单词小写横线隔开（caps-lock）
+            3、系统修饰符 ctrl、alt、shift、meta
+                配合keyup使用，按下修饰键的同时，再按下其他键，随后释放其他键，事件才会被触发
+                配合keydown，正常触发事件
+            3、不推荐使用keyCode值
+            4、自定义按键别名 Vue.config.keyCodes.haha =  13;
+            5、按键也可以连着写 @keyup.ctrl.u
+        -->
+
+        <!-- 准备好一个容器 -->
+        <div id="root1">
+            <h1>hello {{name}}</h1>
+            <input type="text" placeholder="按下回车提示输入" @keyup.ctrl.u="showInfo"></input>
+            
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false; 
+            Vue.config.keyCodes.haha =  13; 
+            //创建Vue实例
+            const vm = new Vue({
+                el: '#root1', //el用于指定当前Vue为哪个容器服务，值通常为css选择器字符串
+                data: { //用于存储数据，供el所指定容器使用
+                    name: 'dx',
+                    age: '10'
+                },
+                methods: { 
+                    showInfo(e){
+                        console.log(e.key, e.keyCode)
+                    }
+                },
+            });
+
+        </script>
+    </body>
+</html>

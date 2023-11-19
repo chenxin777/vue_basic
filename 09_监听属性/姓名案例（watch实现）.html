@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>姓名案例(watch实现) </title>
+        <!-- 引入Vue -->
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 
+            computed和wwatch区别
+                1、computed能完成的功能，wactch都能完成
+                2、watch能完成的，computed不一定能完成，如：watch可以异步操作setTimeOut
+                Tip：
+                    所有被Vue管理的函数，最好写成普通函数，这样this指向vm或组件实例对象
+                    所有不被Vue管理的函数（定时器的回调函数、ajax回调函数、promise的回调函数），最好写成箭头函数
+                
+        -->
+
+        <!-- 准备好一个容器 -->
+        <div id="root1">
+            姓：<input type="text" v-model='firstName'><br><br>
+            名：<input type="text" v-model='lastName'><br><br>
+            全名：<span>{{fullName}}</span>
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false; 
+            //创建Vue实例
+            const vm = new Vue({
+                el: '#root1', //el用于指定当前 Vue为哪个容器服务，值通常为css选择器字符串
+                data: { //用于存储数据，供el所指定容器使用
+                    firstName: '方',
+                    lastName: '晨欣',
+                    fullName: '方-晨欣'
+                },
+                watch: {
+                    firstName(val){
+                        setTimeout(()=>{
+                            this.fullName = val + '-' + this.lastName; 
+                        }, 1000)
+                        
+                    },
+                    lastName(val) {
+                        this.fullName = this.firstName + '-' + val;
+                    }
+                }
+                
+            }); 
+
+        </script>
+    </body>
+</html>

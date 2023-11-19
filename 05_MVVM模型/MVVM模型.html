@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>MVVM模型</title>
+        <!-- 引入Vue -->
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+
+        <!-- 
+            MVVM模型：
+                M：模型model：对应data数据
+                V：视图View：模版
+                VM：视图模型ViewModel：Vue实例对象
+            注意：
+                1、data中所有属性，最后都出现在vm身上
+                2、vm身上所有属性及vue原型上所有属性，在vue模版中都可以使用
+        -->
+        <!-- 准备好一个容器 -->
+        <div id="root">
+            <h1>公司名称：{{name}}</h1>
+            <h1>公司地址：{{addr}}</h1>
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false;
+
+            //创建Vue实例
+            const vm = new Vue({
+                el: '#root', //el用于指定当前Vue为哪个容器服务，值通常为css选择器字符串
+                data: { //用于存储数据，供el所指定容器使用
+                    name: 'dx',
+                    addr: 'cy'
+                }
+            });
+            console.log(vm)
+        </script>
+    </body>
+</html>

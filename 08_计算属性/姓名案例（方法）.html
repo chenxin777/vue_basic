@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>姓名案例（方法）</title>
+        <!-- 引入Vue -->
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 
+           
+        -->
+
+        <!-- 准备好一个容器 -->
+        <div id="root1">
+            姓：<input type="text" v-model='firstName'><br><br>
+            名：<input type="text" v-model='lastName'><br><br>
+            全名：<span>{{fulName()}}</span>
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false; 
+            Vue.config.keyCodes.haha =  13; 
+            //创建Vue实例
+            const vm = new Vue({
+                el: '#root1', //el用于指定当前 Vue为哪个容器服务，值通常为css选择器字符串
+                data: { //用于存储数据，供el所指定容器使用
+                    firstName: '方',
+                    lastName: '晨欣'
+                },
+                methods: { 
+                    fulName(){
+                        return this.firstName + '-' + this.lastName
+                    }
+                },
+            });
+
+        </script>
+    </body>
+</html>

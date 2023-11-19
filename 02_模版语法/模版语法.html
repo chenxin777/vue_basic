@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>模版语法</title>
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!--
+            1、插值语法
+                作用：用于解析标签题内容
+                写法：{{xxx}} xxx是js表达式，可以直接读取data中所有属性
+            2、指令语法
+                作用：用于解析标签（包括：标签属性、标签体内容、绑定事件）
+                举例：v-bind:href="" 或简写：:href="xxx" xxx要写js表达式,可以直接读取data中所有属性 
+          -->
+
+        <div id="root">
+            <h1>插值语法</h1>
+            <h2>hello, {{name}}</h2>
+            <hr>
+            <a v-bind:href="url.toUpperCase()" x="hello">{{btn}}</a>
+            <a :href="url" :x="other.name">{{other.name}}</a>
+        </div>
+    </body>
+    <script type="text/javascript">
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'fcx',
+                btn:'搜素',
+                url:'https://www.baidu.com/',
+                other: {
+                    name: '度娘'
+                }
+            }
+        })
+    </script>
+</html>

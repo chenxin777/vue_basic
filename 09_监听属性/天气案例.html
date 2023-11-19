@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>天气案例</title>
+        <!-- 引入Vue -->
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 
+            绑定事件的时候@xxx='yyy' yyy可以写一些简单语句
+                
+        -->
+
+        <!-- 准备好一个容器 -->
+        <div id="root">
+            <h2>今天天气很{{info}}, {{x}}</h2>
+            <button @click='change'>change</button>
+            <!-- <button @click='isHot = !isHot'>change</button> -->
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false; 
+            //创建Vue实例
+            const vm = new Vue({
+                el: '#root', //el用于指定当前 Vue为哪个容器服务，值通常为css选择器字符串
+                data: { //用于存储数据，供el所指定容器使用
+                    isHot: true,
+                    x: 1
+                },
+                computed: {
+                    info(){
+                        return this.isHot ? 'hot' : 'cold'
+                    }
+                },
+                methods: {
+                    change(){
+                        this.isHot = !this.isHot;
+                        this.x++
+                    }
+                },
+            }); 
+
+        </script>
+    </body>
+</html>

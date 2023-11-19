@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>key的原理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        1、虚拟DOM中的key：
+            key是虚拟DOM对象标识，当对象发生改变，Vue会根据【新数据】生成新的虚拟DOM，
+            随后Vue进行【新虚拟DOM】与【旧虚拟DOM】差异比较，规则如下：
+            （1）旧虚拟DOM找到了与新虚拟DOM相同的key：
+                若虚拟DOM中内容没变，直接使用之前的真实DOM
+                若虚拟DOM中内容变了，则生成新的真实DOM，随后替换掉页面中之前的真实DOM
+            （2）旧虚拟DOM未找到与新虚拟DOM相同的key：
+                创建新真实DOM，随后渲染到页面
+        2、index作为key引发的问题
+            若对数据进行逆序增加、逆序删除等破坏顺序操作，会产生没有必要的真实DOM更新----》界面效果没问题，效率低
+            若结果中包含输入类的DOM，会产生错误的DOM更新----》界面又问题
+        3、开发中如何选择key：
+            1、最好使用每条数据的唯一标识作为key，比如id、手机号、身份证号、学号等唯一值
+            2、如果不存在对数据的逆序添加、逆序删除等破坏顺序的操作，仅用于渲染列表用于展示，index作为key也没问题
+    -->
+    
+    <div id="root">
+        <!-- 遍历数组 -->
+        <h2>人名</h2></h2>
+        <button @click.once="add">添加</button>
+        <ul>
+            <li v-for="(p, index) of persons" :key="p.id"> 
+                {{p.name}}-{{p.age}}----{{index}}
+                <input type="text">
+            </li> 
+        </ul>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            persons: [
+                {id: '1', name: 'aaa', age: '11'},
+                {id: '2', name: 'bbb', age: '12'}, 
+                {id: '3', name: 'ccc', age: '13'}
+            ]
+        },
+        methods: {
+            add(){
+                const p = {id: '4', name: 'ddd', age: '14'}
+                this.persons.push(p)
+            }
+        }, 
+    })
+</script>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本列表</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 遍历数组 -->
+        <h2>人名</h2></h2>
+        <ul>
+            <li v-for="(p, index) of persons" :key="index"> 
+                {{p.name}}-{{p.age}}----{{index}}
+            </li>
+        </ul>
+        <!-- 便利对象 -->
+        <h2>汽车信息</h2>
+        <ul>
+            <li v-for="(value, key) of car" :key="index"> 
+                {{key}} -- {{value}}
+            </li> 
+        </ul>
+        <!-- 遍历字符串 -->
+        <h2>字符串</h2>
+        <ul>
+            <li v-for="(char, index) of str" :key="index"> 
+                {{index}} -- {{char}}
+            </li> 
+        </ul>
+        <!-- 遍历制定次数 -->
+        <h2>次数</h2>
+        <ul>
+            <li v-for="(number, index) of 5" :key="index"> 
+                {{index}} -- {{number}}
+            </li> 
+        </ul>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            persons: [
+                {id: '1', name: 'aaa', age: '11'},
+                {id: '2', name: 'bbb', age: '12'},
+                {id: '3', name: 'ccc', age: '13'}
+            ],
+            car: {
+                name: 'audi',
+                price: '100w',
+                color: 'black'
+            },
+            str: 'hello'
+        }
+    })
+</script>
+</html>

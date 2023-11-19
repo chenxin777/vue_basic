@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        v-show和v-if区别
+            频率高用v-show，频率低用v-if
+        v-else和v-else-if
+            结构中间不能被打断
+        template 在dom里不显示，只能搭配v-if
+    -->
+    <div id="root">
+        <!-- v-show="false" 等价于 display: none -->
+        <h2 v-show="1==2">hello {{name}}</h2>
+        <!-- v-if="false" dom直接没有-->
+        <h2 v-if="1==1">hello {{name}}</h2>
+
+        <h2>当前的值为{{n}}</h2>
+        <button @click="n++">pick</button>
+        <br>
+        <div v-if="n===1">Angular</div>
+        <div v-else-if="n===2">React</div>
+        <div v-else-if="n===3">Vue</div>
+        <div v-else>ok</div> 
+        <!-- template和v-if配合使用 -->
+        <template v-if="n===1">
+            <h2>bj</h2> 
+            <h2>sd</h2>
+            <h2>nj</h2>
+        </template>
+        
+    </div>
+</body>
+<script type="text/javascript">
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            name: 'dx',
+            n: 0
+        }
+    })
+</script>
+</html>

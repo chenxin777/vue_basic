@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>姓名案例（计算属性）</title>
+        <!-- 引入Vue -->
+        <script type="text/javascript" src="../js/vue.js"></script>
+    </head>
+    <body>
+        <!-- 
+            计算属性：
+                1、定义：要用的属性不存在，要通过已有属性计算出来
+                2、原理：底层借助了Object.defineproperty方法提供的getter、setter
+                3、get什么时候执行：
+                    当计算属性读取时，get()方法被调用
+                    get什么时候被调用：初次读取；依赖的数据发生改变
+                4、优势
+                    与methods相比，内部有缓存机制（复用），效率高、调试方便
+                5、计算属性最终会出现在vm上，直接读取使用即可
+                6、如果计算属性要被修改，必须写set函数去响应修改，set中要引起计算时依赖的数据发生改变
+        -->
+
+        <!-- 准备好一个容器 -->
+        <div id="root1">
+            姓：<input type="text" v-model='firstName'><br><br>
+            名：<input type="text" v-model='lastName'><br><br>
+            全名：<span>{{fullName}}</span>
+        </div>
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false; 
+            Vue.config.keyCodes.haha =  13; 
+            //创建Vue实例
+            const vm = new Vue({
+                el: '#root1', //el用于指定当前 Vue为哪个容器服务，值通常为css选择器字符串
+                data: { //用于存储数据，供el所指定容器使用
+                    firstName: '方',
+                    lastName: '晨欣'
+                },
+                computed: {
+                    fullName: {
+                        // 当计算属性读取时，get()方法被调用
+                        // get什么时候被调用：初次读取；依赖的数据发生改变
+                        get(){
+                            return this.firstName + '-' + this.lastName
+                        },
+                        // set什么时候被调用，当fullName被修改的时候
+                        set(value){
+                            console.log('set', value) 
+                            const arr = value.split('-')
+                            this.firstName = arr[0]
+                            this.lastName = arr[1]
+                        }
+                
+                    }
+                }
+            }); 
+
+        </script>
+    </body>
+</html>

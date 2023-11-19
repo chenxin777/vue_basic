@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>事件修饰符</title>
+        <!-- 引入Vue -->
+        <script type="text/javascript" src="../js/vue.js"></script>
+        <style>
+            *{
+                margin-top: 20px;
+            }
+            .demo1{
+                height: 50px;
+                background-color: skyblue;
+            }
+            .box1{
+                padding: 5px;
+                background-color: skyblue;
+            }
+            .box2{
+                padding: 5px;
+                background-color: orange;
+            }
+            .list{
+                width: 200px;
+                height: 200px;
+                background-color: purple;
+                overflow: auto;
+            }
+            li{
+                height: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 
+            1、prevent：阻止默认事件（常用）
+            2、stop：阻止事件冒泡
+            3、once：事件只触发一次
+            4、capture：使用事件的捕获模式
+            5、self：只有event.target是当前操作的元素时才触发事件
+            6、passive：事件的默认行为立即执行，无需等待事件回调执行完毕 
+            修饰符可以连着写
+        -->
+
+        <!-- 准备好一个容器 -->
+        <div id="root1">
+            <a href="www.baidu.com" @click.prevent="showInfo">pick</a>
+
+            <div class="demo1" @click="showInfo">
+                <button @click.stop="showInfo">pick</button>
+            </div>
+
+            <button @click.once="showInfo">pick</button>
+
+            <!-- 
+                1->2事件捕获阶段 
+                2->1事件冒泡阶段
+            -->
+            <div class="box1" @click.capture="showMsg(1)">
+                div1
+                <div class="box2" @click="showMsg(2)">
+                    div2 
+                </div>
+            </div>
+
+            <div class="demo1" @click.self="showInfo">
+                <button @click="showInfo">pick</button>
+            </div>
+
+            <ul @wheel.passive="demo" class="list">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+            </ul>
+        </div> 
+
+        <script type="text/javascript">
+            Vue.config.productionTip = false;
+
+            //创建Vue实例
+            const vm = new Vue({
+                el: '#root1', //el用于指定当前Vue为哪个容器服务，值通常为css选择器字符串
+                data: { //用于存储数据，供el所指定容器使用
+                    name: 'dx',
+                    age: '10'
+                }, 
+                methods: {
+                    showInfo(e){
+                        alert("hello")
+                    },
+                    showMsg(msg){
+                        alert(msg)
+                    },
+                    demo(){
+                        for (let i = 0; i < 10000; i++) {
+                            console.log('#')
+                        }
+                        console.log('end')
+                    }
+                },
+            });
+
+        </script>
+    </body>
+</html>
