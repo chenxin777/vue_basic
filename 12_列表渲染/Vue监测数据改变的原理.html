@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue监测数据改变的原理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>公司：{{company}}</h2>
+        <h2>地址：{{addr}}</h2>
+    </div>
+
+    <script type="text/javascript">
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                company: 'dx',
+                addr: 'chengyang',
+                student: {
+                    name: 'tom',
+                    age: {
+                        rage: 67,
+                        sage: 22
+                    },
+                    friends: [
+                        {name: 'jack', age: 11},
+                        {name: 'cx', age: 22}
+                    ]
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
